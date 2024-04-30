@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "383902291038",
+    "project_id": "clean-arch-sample-ba682",
+    "storage_bucket": "clean-arch-sample-ba682.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383902291038:android:c13adf1a650d96ec6ad0cf",
+        "android_client_info": {
+          "package_name": "com.example.sqflite_example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOB30VnEN8cRWcjoowgab6rJ5af_9OklA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383902291038:android:c56bbbf43a853e276ad0cf",
+        "android_client_info": {
+          "package_name": "com.sourcefuse.clean_arch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOB30VnEN8cRWcjoowgab6rJ5af_9OklA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
