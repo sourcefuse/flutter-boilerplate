@@ -51,3 +51,6 @@ lcov --remove coverage/lcov.info 'lib/utils/*' 'lib/common/*' 'lib/core/data/map
 genhtml coverage/new_lcov.info --output=coverage
 open coverage/index.html
 ```
+
+LCOV Report will look like below:
+<img width="1436" alt="LCOV Report for Clean Arch" src="https://github.com/arun14aug/clean_arch_flutter/assets/6661995/8d974226-8398-492c-8c35-03c9cf1776e7">
