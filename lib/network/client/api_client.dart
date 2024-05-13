@@ -1,3 +1,4 @@
+import 'package:clean_arch/network/rest_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
@@ -31,6 +32,38 @@ class ApiClient {
         responseBody: true,
       ));
     }
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          // Add the access token to the request header
+          return handler.next(options);
+        },
+        onError: (DioException e, handler) async {
+          if (e.response?.statusCode == RestConstants.unauthorized) {
+            // If a 401 response is received, refresh the access token
+            // String newAccessToken = await refreshToken();
+            // if (newAccessToken.isNotEmpty) {
+            //   // Update the request header with the new access token
+            //   e.requestOptions.headers['Authorization'] =
+            //   'Bearer $newAccessToken';
+            //   isRefreshTokenCalled = false;
+
+              // Repeat the request with the updated header
+              return handler.resolve(await dio.fetch(e.requestOptions));
+            // }
+          } else if (e.response?.statusCode == RestConstants.badRequest) {
+            //Handle error code 400
+          } else if (e.response?.statusCode == RestConstants.forbidden) {
+            //Handle error code 403
+          } else if (e.response?.statusCode == RestConstants.notFound) {
+            //Handle error code 404
+          } else if (e.response?.statusCode == RestConstants.internalServerError) {
+            //Handle error code 500
+          }
+          return handler.next(e);
+        },
+      ),
+    );
     return dio;
   }
 }
