@@ -1,16 +1,16 @@
+import 'package:clean_arch/common/constants.dart';
+import 'package:clean_arch/core/data/dto/note_request_model.dart';
+import 'package:clean_arch/presenter/bloc/provider/note_list_bloc.dart';
+import 'package:clean_arch/presenter/ui/add_note/provider/note_blocs_provider.dart';
+import 'package:clean_arch/presenter/ui/home/data_model/note_view_model.dart';
+import 'package:clean_arch/presenter/ui/home/helper/add_button_widget.dart';
+import 'package:clean_arch/presenter/ui/home/helper/note_tile_widget.dart';
+import 'package:clean_arch/presenter/ui/home/helper/refresh_button_widget.dart';
+import 'package:clean_arch/presenter/ui/home/provider/home_blocs_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import 'package:clean_arch/common/constants.dart';
-import 'package:clean_arch/core/data/dto/note_model.dart';
-import 'package:clean_arch/core/data/dto/note_request_model.dart';
-import 'package:clean_arch/presenter/bloc/provider/note_list_bloc.dart';
-import 'package:clean_arch/presenter/ui/add_note/provider/note_blocs_provider.dart';
-import 'package:clean_arch/presenter/ui/home/provider/home_blocs_provider.dart';
-import 'package:clean_arch/presenter/ui/home/helper/add_button_widget.dart';
-import 'package:clean_arch/presenter/ui/home/helper/note_tile_widget.dart';
-import 'package:clean_arch/presenter/ui/home/helper/refresh_button_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -62,11 +62,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               {
                 NoteListSuccessState noteListSuccessState =
                     state as NoteListSuccessState;
-                List? list = noteListSuccessState.data;
-                if (list == null || list.isEmpty) {
+                List<NoteViewModel> list = noteListSuccessState.data;
+                if (list.isEmpty) {
                   return const _BuildEmptyWidget();
                 } else {
-                  return _buildListWidget(list as List<NoteModel>);
+                  return _buildListWidget(list);
                 }
               }
             case NoteListErrorState:
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   ///
   /// Returns:
   ///   A widget of type AnimatedList is being returned.
-  Widget _buildListWidget(List<NoteModel> noteList) {
+  Widget _buildListWidget(List<NoteViewModel> noteList) {
     return AnimatedList(
       key: noteListBloc.listKey,
       initialItemCount: noteList.length,

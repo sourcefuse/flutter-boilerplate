@@ -1,9 +1,9 @@
+import 'package:clean_arch/presenter/ui/home/data_model/note_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:clean_arch/core/data/dto/note_model.dart';
 
 // coverage:ignore-file
 class NoteTile extends StatelessWidget {
-  final NoteModel note;
+  final NoteViewModel note;
   final VoidCallback? onDelete;
 
   const NoteTile({

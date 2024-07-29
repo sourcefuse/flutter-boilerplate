@@ -4,7 +4,7 @@ import 'package:clean_arch/core/domain/usecases/note_module/add_note_usescase.da
 import 'package:clean_arch/network/entities/base_response.dart';
 import 'package:clean_arch/presenter/bloc/provider/note_list_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part '../event/add_note_event.dart';
 part '../state/add_note_state.dart';
@@ -15,8 +15,9 @@ class AddNoteBloc extends Bloc<AddNoteEvent, AddNoteState> {
   final NoteListBloc noteListBloc;
   final AddNote addNote;
 
- /// This code snippet is defining the behavior of the `AddNoteBloc` class in Dart. Let's break it down:
-  AddNoteBloc(this.addNote, this.noteListBloc) : super(const AddNoteInitialState('')) {
+  /// This code snippet is defining the behavior of the `AddNoteBloc` class in Dart. Let's break it down:
+  AddNoteBloc(this.addNote, this.noteListBloc)
+      : super(const AddNoteInitialState('')) {
     on<AddNoteSubmitEvent>((event, emit) {
       return submitNote(event, emit);
     });
@@ -24,7 +25,7 @@ class AddNoteBloc extends Bloc<AddNoteEvent, AddNoteState> {
 
   /// The `submitNote` function in Dart handles the submission of a note, updating the state accordingly
   /// based on the result.
-  /// 
+  ///
   /// Args:
   ///   event (AddNoteSubmitEvent): The `event` parameter in the `submitNote` function is of type
   /// `AddNoteSubmitEvent`. It is used to pass the data related to the note that needs to be added.
