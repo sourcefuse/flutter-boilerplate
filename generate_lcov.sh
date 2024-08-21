@@ -1,4 +1,4 @@
 flutter test --coverage
-lcov --remove coverage/lcov.info 'lib/utils/*' 'lib/common/*' 'lib/core/data/mapper/*' 'lib/core/domain/entities/*' 'lib/core/injector.dart' 'lib/network/base/*' 'lib/network/rest_constants.dart' 'lib/presenter/ui/*' 'lib/provider/*' 'lib/network/entities/*' 'lib/network/client/*' 'lib/core/data/dto/*.g.dart' 'lib/core/domain/usecases/usecase_contracts.dart' 'lib/core/data/datasource/*' 'lib/main.dart' 'lib/controller/*' 'lib/core/dependency_injector.dart' 'lib/firebase_options.dart' -o coverage/new_lcov.info
+lcov --remove coverage/lcov.info 'lib/utils/*' 'lib/common/*' 'lib/core/data/mapper/*' 'lib/core/domain/entities/*' 'lib/core/injector.dart' 'lib/network/base/*' 'lib/network/rest_constants.dart' 'lib/presenter/ui/*' 'lib/provider/*' 'lib/network/entities/*' 'lib/network/client/*' 'lib/core/data/dto/*.g.dart' 'lib/core/domain/usecases/usecase_contracts.dart' 'lib/core/data/datasource/*' 'lib/main_common.dart' 'lib/controller/*' 'lib/core/dependency_injector.dart' 'lib/firebase_options.dart' -o coverage/new_lcov.info
 genhtml coverage/new_lcov.info --output=coverage
 open coverage/index.html

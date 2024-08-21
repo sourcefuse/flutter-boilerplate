@@ -10,4 +10,9 @@ class RestConstants {
   static const int forbidden = 403; //  failure, API rejected request
   static const int internalServerError = 500; // failure, crash in server side
   static const int notFound = 404; // failure
+  static String kRefreshToken = "";
+
+  static String kAuthTokenURL = "";
+
+  static String kAuthMeURL = "";
 }

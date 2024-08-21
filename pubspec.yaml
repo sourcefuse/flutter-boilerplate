@@ -31,6 +31,7 @@ dependencies:
   rxdart: any
   firebase_core_platform_interface: any
   bloc_test: ^9.1.3
+  flutter_riverpod: ^2.5.1
 
 #  cupertino_icons: ^1.0.2
 ##  sqflite: ^2.0.2+1

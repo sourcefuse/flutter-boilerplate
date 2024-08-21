@@ -10,6 +10,8 @@ class ApiClient {
   static const String kRequiredHeader = 'Header';
   static const String kAuthorization = 'Authorization';
 
+  static var kContentType;
+
   factory ApiClient() {
     return _converter;
   }
