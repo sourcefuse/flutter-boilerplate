@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:clean_arch/core/injector.dart';
-import 'package:clean_arch/presenter/ui/home/home_page.dart';
+import 'package:clean_arch/presenter/ui/dashboard/dashboard_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: (context, child) {
         return const MaterialApp(
-          home: HomePage(),
+          home: DashboardScreen(),
         );
       },
     );

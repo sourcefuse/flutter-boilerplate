@@ -2,7 +2,7 @@ const String kSomethingWentWrongMessage = 'Something went wrong!';
 const String kServerConnectionErrorMessage =
     'Couldn\'t connect with server. Please try again.';
 
-const String kCollectionNotes = "notes";
+const String kCollectionItems = "notes";
 
 //URLs
 const String kLoadingURL =
