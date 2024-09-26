@@ -1,19 +1,19 @@
 import 'package:clean_arch/core/domain/entities/task_model.dart';
 
 import '../../../../core/errors/exceptions.dart';
-import '../../../network/client/home_client.dart';
+import '../../../network/client/rest_client.dart';
 import 'package:dio/dio.dart';
 
-abstract class HomeRemoteDataSource {
+abstract class APIRemoteDataSource {
   Future<List<Task>> getTasks();
 }
 
-class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
-  HomeRemoteDataSourceImpl({
+class APIRemoteDataSourceImpl implements APIRemoteDataSource {
+  APIRemoteDataSourceImpl({
     required this.homeClient,
   });
 
-  HomeClient homeClient;
+  RestClient homeClient;
 
   @override
   Future<List<Task>> getTasks() async {

@@ -1,9 +1,9 @@
-import 'package:clean_arch/core/data/datasource/home_remote_data_source.dart';
+import 'package:clean_arch/core/data/datasource/api_remote_data_source.dart';
 import 'package:clean_arch/core/data/repositories/api_repository_impl.dart';
 import 'package:clean_arch/core/domain/repositories/api_repository_contract.dart';
 import 'package:clean_arch/core/domain/usecases/get_tasks_usescase.dart';
 import 'package:clean_arch/network/client/api_client.dart';
-import 'package:clean_arch/network/client/home_client.dart';
+import 'package:clean_arch/network/client/rest_client.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,10 +27,10 @@ Future setUpLocator() async {
 
   //API Client
   sl.registerSingleton(ApiClient().dio());
-  sl.registerSingleton(HomeClient(sl()));
+  sl.registerSingleton(RestClient(sl()));
   //DataSource
-  sl.registerLazySingleton<HomeRemoteDataSource>(
-      () => HomeRemoteDataSourceImpl(homeClient: sl()));
+  sl.registerLazySingleton<APIRemoteDataSource>(
+      () => APIRemoteDataSourceImpl(homeClient: sl()));
   //Repositories
   sl.registerLazySingleton<FirebaseRepositoryContract>(
       () => FirebaseRepositoryImpl(firebaseHelper: sl()));
