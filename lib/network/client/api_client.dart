@@ -1,69 +1,47 @@
-import 'package:clean_arch/network/rest_constants.dart';
+import 'package:clean_arch/core/data/model/login_res_model/login_response.dart';
+import 'package:clean_arch/network/entities/network_exceptions.dart';
+import 'package:clean_arch/presenter/ui/login/login_req_model.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+import 'package:retrofit/http.dart';
 
-/// The `ApiClient` class in Dart is a singleton class that provides a Dio instance for making API
-/// requests with optional logging in debug mode.
-class ApiClient {
-  static final ApiClient _converter = ApiClient._internal();
+import '../rest_constants.dart';
 
-  static const String kRequiredHeader = 'Header';
-  static const String kAuthorization = 'Authorization';
+part 'api_client.g.dart';
 
-  factory ApiClient() {
-    return _converter;
+@RestApi(baseUrl: RestConstants.kStagingBaseUrl)
+abstract class ApiClient {
+  factory ApiClient({String? baseUrl, bool? showLoader}) {
+    Dio dio = Dio();
+    dio.options = BaseOptions(
+        receiveTimeout: const Duration(seconds: 50),
+        connectTimeout: const Duration(seconds: 50),
+        baseUrl: RestConstants.kStagingBaseUrl);
+    dio.options.headers["Authorization"] = "UserToken";
+    RequestOptions? reqOptions;
+    dio.interceptors.add(LogInterceptor(
+        request: false,
+        requestBody: false,
+        requestHeader: false,
+        responseBody: false,
+        responseHeader: false));
+    dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
+      if (showLoader ?? true) {}
+      reqOptions = options;
+      return handler.next(options);
+    }, onResponse: (response, handler) async {
+      if (showLoader ?? true) {}
+      return handler.next(response);
+    }, onError: (DioException e, handler) {
+      if (showLoader ?? true) {}
+      retryApiFromClient(e, reqOptions, dio, handler);
+      // return handler.next(err);
+    }));
+    return _ApiClient(dio, baseUrl: baseUrl);
   }
 
-  ApiClient._internal();
+  @POST(RestConstants.loginUrl)
+  Future<LoginResponseModel> loginUser(@Body() LoginRequestModel data);
 
-  Dio dio() {
-    var dio = Dio(
-      BaseOptions(
-        connectTimeout: const Duration(milliseconds: 10000),
-        receiveTimeout: const Duration(milliseconds: 10000),
-      ),
-    );
-
-    if (kDebugMode) {
-      dio.interceptors.add(LogInterceptor(
-        error: true,
-        requestHeader: true,
-        requestBody: true,
-        responseBody: true,
-      ));
-    }
-    dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (options, handler) async {
-          // Add the access token to the request header
-          return handler.next(options);
-        },
-        onError: (DioException e, handler) async {
-          if (e.response?.statusCode == RestConstants.unauthorized) {
-            // If a 401 response is received, refresh the access token
-            // String newAccessToken = await refreshToken();
-            // if (newAccessToken.isNotEmpty) {
-            //   // Update the request header with the new access token
-            //   e.requestOptions.headers['Authorization'] =
-            //   'Bearer $newAccessToken';
-            //   isRefreshTokenCalled = false;
-
-              // Repeat the request with the updated header
-              return handler.resolve(await dio.fetch(e.requestOptions));
-            // }
-          } else if (e.response?.statusCode == RestConstants.badRequest) {
-            //Handle error code 400
-          } else if (e.response?.statusCode == RestConstants.forbidden) {
-            //Handle error code 403
-          } else if (e.response?.statusCode == RestConstants.notFound) {
-            //Handle error code 404
-          } else if (e.response?.statusCode == RestConstants.internalServerError) {
-            //Handle error code 500
-          }
-          return handler.next(e);
-        },
-      ),
-    );
-    return dio;
-  }
+  @POST(RestConstants.registerUrl)
+  Future<LoginResponseModel> registerUser(@Body() LoginRequestModel data);
 }
