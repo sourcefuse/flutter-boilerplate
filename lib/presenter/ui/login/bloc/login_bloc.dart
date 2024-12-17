@@ -8,15 +8,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final ApiClient apiService; // Your Retrofit service class
 
   LoginBloc({required this.apiService}) : super(LoginInitialState()) {
-    on<LoginButtonPressed>((event, emit) {
+    on<LoginButtonPressed>((event, emit) async {
       ///----On LoginButtonPressedEvent
       emit(LoginLoadingState());
-      handleLoginButtonClick(event.email, event.password, emit);
+      await handleLoginButtonClick(event.email, event.password, emit);
     });
   }
 
   ///----------Functions to handle the page state
-  void handleLoginButtonClick(
+  Future<void> handleLoginButtonClick(
       String email, String password, Emitter<LoginState> emit) async {
     try {
       final loginRequest = LoginRequestModel(

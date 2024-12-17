@@ -1,3 +1,4 @@
+import 'package:clean_arch/presenter/ui/dashboard/dashboard_page.dart';
 import 'package:clean_arch/presenter/ui/login/login_page.dart';
 import 'package:clean_arch/presenter/ui/signup/signup_page.dart';
 import 'package:flutter/material.dart';
@@ -6,14 +7,17 @@ class Routes {
   // Named routes
   static const String login = '/login';
   static const String signup = '/signup';
+  static const String dashboard = '/dashboard';
 
   // Define all routes in the application in one place
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case login:
         return MaterialPageRoute(builder: (_) => LoginPage());
-        case signup:
+      case signup:
         return MaterialPageRoute(builder: (_) => SignupScreen());
+      case dashboard:
+        return MaterialPageRoute(builder: (_) => const DashboardPage());
       default:
         return _errorRoute();
     }

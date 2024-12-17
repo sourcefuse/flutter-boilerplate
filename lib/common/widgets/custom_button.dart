@@ -21,11 +21,11 @@ Widget customButton({
   ButtonType buttonType = ButtonType.filled, // Default to outlined button
 }) {
   // Default colors
-  borderSideColor ??= Theme.of(context).colorScheme.primary;
-  backgroundColor ??= Theme.of(context).colorScheme.primary;
+  borderSideColor ??= Theme.of(context).primaryColor;
+  backgroundColor ??= Theme.of(context).primaryColor;
   textColor = buttonType == ButtonType.filled
       ? Colors.white
-      : Theme.of(context).colorScheme.primary;
+      : Theme.of(context).primaryColor;
 
   // Based on the button type (filled or outlined), adjust the button style
   return OutlinedButton(

@@ -34,9 +34,10 @@ class SignupScreen extends StatelessWidget {
         child: BlocListener<SignupBloc, SignupState>(
           listener: (context, state) {
             if (state is SignupSuccessState) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text('Signup successful! Token: ${state.token}'),
-              ));
+              Routes.navigateAndRemoveAll(context, Routes.dashboard);
+              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              //   content: Text('Signup successful! Token: ${state.token}'),
+              // ));
             } else if (state is SignupFailureState) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text('Signup failed: ${state.errorMessage}'),

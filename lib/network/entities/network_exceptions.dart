@@ -39,6 +39,7 @@ class NetworkExceptions implements Exception {
       case 401:
         return "unauthorized Request";
       case 402:
+
         /// return e.response?.data['msg']; ---this way you can find message from the exception
         return "";
       case 403:
@@ -64,6 +65,8 @@ class NetworkExceptions implements Exception {
 
 void retryApiFromClient(DioException e, RequestOptions? reqOptions, Dio dio,
     ErrorInterceptorHandler handler) {
+  ///-----with the reqOptions you can find all the details of failed request
+  ///---with the dio you can find the instance of dio and call the api again
   var message = NetworkExceptions.fromDioError(e);
   if (navigatorKey.currentContext != null &&
       navigatorKey.currentContext!.mounted) {
@@ -71,6 +74,6 @@ void retryApiFromClient(DioException e, RequestOptions? reqOptions, Dio dio,
       SnackBar(content: Text('$message')),
     );
   }
-
-  ///------Here you can find all the req option
+  ///-----it is required to continue the code
+  handler.next(e);
 }

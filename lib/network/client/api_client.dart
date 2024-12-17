@@ -1,3 +1,4 @@
+import 'package:clean_arch/core/data/model/dashboard_res_model/dashboard_response.dart';
 import 'package:clean_arch/core/data/model/login_res_model/login_response.dart';
 import 'package:clean_arch/network/entities/network_exceptions.dart';
 import 'package:clean_arch/presenter/ui/login/login_req_model.dart';
@@ -44,4 +45,7 @@ abstract class ApiClient {
 
   @POST(RestConstants.registerUrl)
   Future<LoginResponseModel> registerUser(@Body() LoginRequestModel data);
+
+  @GET(RestConstants.posts)
+  Future<List<DashboardResponse>?> fetchDashboardData();
 }

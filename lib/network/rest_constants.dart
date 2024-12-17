@@ -4,5 +4,6 @@ class RestConstants {
   static const String kStagingBaseUrl = 'https://$kApiHost/api/';
   static const String loginUrl = '/login';
   static const String registerUrl = '/register';
+  static const String posts = '/posts';
 
 }

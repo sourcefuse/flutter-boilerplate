@@ -5,6 +5,8 @@ import 'package:clean_arch/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'common/themes/themes.dart';
+
 void main() async {
   /// The code snippet you provided is using `runZonedGuarded` function in Dart.
   await runZonedGuarded(() async {
@@ -44,6 +46,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           home: LoginPage(),
           onGenerateRoute: Routes.generateRoute,
+          theme: lightTheme(),
         );
       },
     );

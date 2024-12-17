@@ -28,9 +28,10 @@ class LoginPage extends StatelessWidget {
         child: BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state is LoginSuccessState) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text('Login successful! Token: ${state.token}'),
-              ));
+              Routes.navigateAndRemoveAll(context, Routes.dashboard);
+              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              //   content: Text('Login successful! Token: ${state.token}'),
+              // ));
             } else if (state is LoginFailureState) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text('Login failed: ${state.errorMessage}'),

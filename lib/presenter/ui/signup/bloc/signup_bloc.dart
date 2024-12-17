@@ -7,13 +7,13 @@ import 'signup_state.dart';
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
   final ApiClient apiService; // Your Retrofit service class
   SignupBloc({required this.apiService}) : super(SignupInitialState()) {
-    on<SignupSubmitted>((event, emit) {
+    on<SignupSubmitted>((event, emit) async {
       emit(SignupLoadingState());
-      handleSignupButtonClick(event.email, event.password, emit);
+      await handleSignupButtonClick(event.email, event.password, emit);
     });
   }
 
-  void handleSignupButtonClick(
+  Future<void> handleSignupButtonClick(
       String email, String password, Emitter<SignupState> emit) async {
     try {
       final loginRequest = LoginRequestModel(
